@@ -1,0 +1,83 @@
+/* pages/test/test.wxss */
+.container{
+  padding:0;
+  width:750rpx;
+  margin:0rpx;
+  padding: 0rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  border-bottom: 5rpx solid;
+}
+
+.container view{
+  padding:0;
+  width:103rpx;
+  height:103rpx;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container button{
+  padding:0rpx;
+  width:1rpx;
+  height:100rpx;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:100%;
+  background-color: white;
+}
+
+.right{
+  opacity: 0.5;
+}
+
+.past button{
+  opacity: 0.5;
+}
+
+.date_checked button{
+  background-color:#DCDCDC;
+}
+
+.today button{
+  background-color:blue;
+  color:white;
+}
+
+.bookcontainer{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.book{
+  width: 650rpx;
+  margin-top: 10rpx;
+  padding:30rpx;
+  border-radius: 20rpx;
+  background-color:	#7FFFAA;
+  opacity: 0.6;
+}
+
+.book:active{
+  background-color: 	#32CD32;
+}
+
+.book_filled{
+  background-color: 	#696969;
+}
+
+.book_filled:active{
+  background-color: 	#696969;
+}
+
+.state{
+  position:relative;
+  left:450rpx;
+}
+

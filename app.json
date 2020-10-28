@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/timeSet/timeSet",
+    "pages/test/test",
+    "pages/test2/test2",
+    "pages/logs/logs",
+    "pages/index/index",
+    "pages/meetingroom/meetingroom"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/test/test",
+        "text": "会议室",
+        "iconPath": "image/tarBar1.png",
+        "selectedIconPath": "image/tarBarSelected1.png"
+      },
+      {
+        "pagePath": "pages/test2/test2",
+        "text": "个人中心",
+        "iconPath": "image/tarbar2.png",
+        "selectedIconPath": "image/tarbarselected2.png"
+      }
+    ]
+  }
+}

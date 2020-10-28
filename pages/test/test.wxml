@@ -1,0 +1,33 @@
+<!--pages/test/test.wxml-->
+<view class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
+  <view style="font-size: 50rpx;width:750rpx">
+    <view bindtap="lastmonth" data-month="{{month}}">{{month}}月</view>
+    {{year}}年{{month+1}}月
+    <view bindtap="nextmonth" data-month="{{month}}">{{month+2}}月</view>
+  </view>
+
+    <view wx:for="{{weeks}}" wx:for-item="week" style="border-bottom-style:solid">
+      <li>{{week}}</li>
+    </view>
+    <view class="left" wx:for="{{left}}">
+      <button>
+        {{item.day}}
+      </button>
+    </view>
+    <view class='date {{item.checked?"date_checked":""}} {{item.id==-1?"past":""}} {{item.id==0&&item.checked?"today":""}}' wx:for="{{allday}}" >
+      <button bindtap='alldayTap' data-id='{{item.day}}' disabled='{{item.id==-1?"disabled":""}}' >
+        {{item.day}}
+      </button>
+    </view>
+    <view class="right" wx:for="{{right}}">
+      <button bindtap='nextmonth' data-id='{{item.day}}' data-month='item.month'>
+        {{item.day}}
+      </button>
+    </view>
+</view>
+<view class="bookcontainer">
+  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}'>
+  <text>{{item.name}}</text>
+  <text class="state">{{item.state==1?"有":"满"}}</text>
+  </view>
+</view>
