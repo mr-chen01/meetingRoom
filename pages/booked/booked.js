@@ -5,9 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    year:2020,
-    month:9,
-    date:29,
+    date:{year:2020,month:9,date:29},
     roomDetail:[],
     roomSchedule:[]
   },
@@ -79,13 +77,12 @@ Page({
     x=wx.cloud.callFunction({
       name: 'roomDetail',
       data:{
-        year:that.data.year,
-        month: that.data.month,
-        date:that.data.date
+        year:that.data.date.year,
+        month: that.data.date.month,
+        date:that.data.date.date
       },
     })
     .then(res=>{
-      console.log(res.result.data)
       that.setData({
         roomDetail:res.result.data
       })
@@ -103,7 +100,17 @@ Page({
     that.setData({
       roomSchedule:schedule
     })  
-    console.log(that.data.roomSchedule)
+  },
+
+  redirect:function(){
+    var schedule=this.data.roomSchedule
+    var date=this.data.date
+    wx.redirectTo({
+      url:'/pages/timeSet/timeSet?schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date),
+      fail:res=>{
+        console.log(res)
+      }
+    })
   },
 
 })

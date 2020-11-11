@@ -11,7 +11,7 @@
     <text>开始时间:</text>
       <picker name="starttime" header-text="开始时间" mode="multiSelector" range="{{sRange}}" value="{{sIndex}}"  
       bindcolumnchange="startTimeHourChange">
-        <text style="">{{year}}年{{month+1}}月{{date}}日 {{sRange[0][sIndex[0]]}}:{{sRange[1][sIndex[1]]}}>
+        <text style="">{{date.year}}年{{date.month+1}}月{{date.date}}日 {{sRange[0][sIndex[0]]}}:{{sRange[1][sIndex[1]]}}>
         </text>
       </picker>
   </view>
@@ -20,7 +20,7 @@
       <picker name="endtime" header-text="结束时间" mode="multiSelector" range="{{eRange}}" value="{{eIndex}}" 
       bindcolumnchange="endTimeHourChange"
       >
-        <text style="">{{year}}年{{month+1}}月{{date}}日 {{eRange[0][eIndex[0]]}}:{{eRange[1][eIndex[1]]}}>
+        <text style="">{{date.year}}年{{date.month+1}}月{{date.date}}日 {{eRange[0][eIndex[0]]}}:{{eRange[1][eIndex[1]]}}>
         </text>
       </picker>
   </view>

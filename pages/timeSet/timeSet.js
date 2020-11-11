@@ -5,9 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    year:2020,
-    month:9,
-    date:29,
+    date:null,
     sIndex:[0,0],
     sRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00','10','20','30','40','50','60']],
     sRangeM:[],
@@ -24,16 +22,13 @@ Page({
    */
   onLoad: function (options) {
     var that=this
-    var x=this.roomSchedule()
-    // x.then(()=>{
-    //   that.spareTime()
-    // })
-    // .then(()=>{
-    //   that.startTime()
-    // })
-    // .then(()=>{
-    //   that.endTime()
-    // })
+    that.setData({
+      roomSchedule:JSON.parse(options.schedule),
+      date:JSON.parse(options.date)
+    })
+    that.spareTime()
+    that.startTime()
+    that.endTime()
   },
 
   /**
@@ -316,5 +311,3 @@ Page({
     },
     
 })
-
-// [{s:{h:8,m:'00'},e:{h:9,m:'00'}},{s:{h:9,m:'00'},e:{h:9,m:'30'}},{s:{h:10,m:'20'},e:{h:11,m:'00'}},{s:{h:11,m:'00'},e:{h:13,m:'00'}}]

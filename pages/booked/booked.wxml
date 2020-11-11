@@ -10,5 +10,5 @@
       <text>{{item.organiser}}</text>
     </view>
   </view>
-  <button style="width:200rpx;height:200rpx;border-radius: 100%;padding-top:75rpx;">预约</button>
+  <button style="width:200rpx;height:200rpx;border-radius: 100%;padding-top:75rpx;" bindtap="redirect">预约</button>
 </view>

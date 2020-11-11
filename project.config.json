@@ -28,16 +28,18 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
-    "packNpmRelationList": []
+    "packNpmRelationList": [],
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.1",
   "appid": "wx49a745da91baf5de",
-  "projectname": "meeting",
+  "projectname": "meetingRoom",
   "debugOptions": {
     "hidedInDevtools": []
   },
