@@ -1,0 +1,14 @@
+<!--pages/booked/booked.wxml-->
+<view class='container'>
+  <view class="single" wx:for="{{roomDetail}}">
+    <view class='time'>
+      <text>{{item.schedule.s.h}}:{{item.schedule.s.m}}</text>
+      <text>{{item.schedule.e.h}}:{{item.schedule.e.m}}</text>
+    </view>
+    <view class='body'>
+      <text>{{item.title}}</text>
+      <text>{{item.organiser}}</text>
+    </view>
+  </view>
+  <button style="width:200rpx;height:200rpx;border-radius: 100%;padding-top:75rpx;">预约</button>
+</view>

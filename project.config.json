@@ -36,8 +36,8 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.13.1",
-  "appid": "wxdc9a6f6ae4bedd41",
-  "projectname": "%E5%AD%A6%E4%B9%A0",
+  "appid": "wx49a745da91baf5de",
+  "projectname": "meeting",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -45,29 +45,25 @@
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionRoot": "functions/",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "current": -1,
       "list": []
     },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": []
     }
   }

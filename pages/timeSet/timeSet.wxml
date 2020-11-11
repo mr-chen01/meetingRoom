@@ -1,31 +1,29 @@
 <!--pages/timeSet/timeSet.wxml-->
 <view class="container">
-  <view class="group">
-    <text>会议主题:</text>
-    <input/>
+  <form bindsubmit="formSubmit">
+  <view>
+    <input name="title" placeholder="会议主题"/>
   </view>
-  <view class="group">
-    <text>会议发起人:</text>
-    <input/>
+  <view>
+    <input name="organiser" placeholder="主持人"/>
   </view>
-  <view class="group">
-    <text>会议人数:</text>
-    <picker header-text="会议人数"  bindchange="pickerNumberChange" mode="multiSelector"  value="{{numIndex}}" range="{{[rMax]}}">
-    <input value='{{rMax[numIndex]}}' class="small_input"/>
-    </picker >
-    <text>人</text>
-  </view>
-  <view class="group">
-    <text>会议时间:</text>
-    <border>
-      <picker header-text="开始时间" mode="multiSelector" range="{{sRange}}" value="{{sIndex}}">
-        <input class="small_input" value='{{sRange[0][sIndex[0]]}}:{{sRange[1][sIndex[1]]}}'/>
+  <view class="time">
+    <text>开始时间:</text>
+      <picker name="starttime" header-text="开始时间" mode="multiSelector" range="{{sRange}}" value="{{sIndex}}"  
+      bindcolumnchange="startTimeHourChange">
+        <text style="">{{year}}年{{month+1}}月{{date}}日 {{sRange[0][sIndex[0]]}}:{{sRange[1][sIndex[1]]}}>
+        </text>
       </picker>
-      <text>~</text>
-      <picker header-text="结束时间" mode="multiSelector" range="{{eRange}}">
-        <input class="small_input" value='{{eRange[0][eIndex[0]]}}:{{eRange[1][eIndex[1]]}}'/>
-      </picker>
-    </border>
   </view>
-  <button class="submit" style="width: 200rpx;"><text>预约</text></button>
+  <view class="time">
+    <text>结束时间:</text>
+      <picker name="endtime" header-text="结束时间" mode="multiSelector" range="{{eRange}}" value="{{eIndex}}" 
+      bindcolumnchange="endTimeHourChange"
+      >
+        <text style="">{{year}}年{{month+1}}月{{date}}日 {{eRange[0][eIndex[0]]}}:{{eRange[1][eIndex[1]]}}>
+        </text>
+      </picker>
+  </view>
+  <button formType="submit" style="width: 500rpx;"><text>预约</text></button>
+  </form>
 </view>

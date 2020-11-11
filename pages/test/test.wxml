@@ -1,9 +1,7 @@
 <!--pages/test/test.wxml-->
 <view class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
   <view style="font-size: 50rpx;width:750rpx">
-    <view bindtap="lastmonth" data-month="{{month}}">{{month}}月</view>
     {{year}}年{{month+1}}月
-    <view bindtap="nextmonth" data-month="{{month}}">{{month+2}}月</view>
   </view>
 
     <view wx:for="{{weeks}}" wx:for-item="week" style="border-bottom-style:solid">
