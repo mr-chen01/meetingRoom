@@ -5,9 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date:{year:2020,month:9,date:29},
+    date:{year:"2020",month:"9",date:"29"},
     roomDetail:[],
-    roomSchedule:[]
+    roomSchedule:[],
+    pId:'1',
+    rId:'2',
+    priority:1,
   },
 
   /**
@@ -104,9 +107,12 @@ Page({
 
   redirect:function(){
     var schedule=this.data.roomSchedule
-    var date=this.data.date
+    var date=this.data.date,
+    pId=this.data.pId,rId=this.data.rId,
+    priority=this.data.priority
+    var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+JSON.stringify(pId)+'&rId='+JSON.stringify(pId)+'&priority='+JSON.stringify(priority)
     wx.redirectTo({
-      url:'/pages/timeSet/timeSet?schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date),
+      url:'/pages/timeSet/timeSet?'+para,
       fail:res=>{
         console.log(res)
       }
