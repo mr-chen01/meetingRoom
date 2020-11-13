@@ -1,4 +1,4 @@
-<!--pages/test/test.wxml-->
+<!--pages/calendar/calendar.wxml-->
 <view class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
   <view style="font-size: 50rpx;width:750rpx">
     {{year}}年{{month+1}}月

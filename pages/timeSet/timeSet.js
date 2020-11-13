@@ -25,7 +25,10 @@ Page({
     console.log(options)
     that.setData({
       roomSchedule:JSON.parse(options.schedule),
-      date:JSON.parse(options.date)
+      date:JSON.parse(options.date),
+      pId:options.pId,
+      rId:options.rId,
+      priority:options.priority,
     })
     that.spareTime()
     that.startTime()
@@ -119,7 +122,7 @@ Page({
               spareTime:spare
             }
           )
-          console.log(this.data.spareTime)
+
    },
 
    startTime:function(){

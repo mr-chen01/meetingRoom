@@ -87,9 +87,9 @@ Page({
         roomDetail:res.result.data
       })
    })
-   .then(()=>{
-     console.log(that.data.roomDetail)
-   })
+  //  .then(()=>{
+  //    console.log(that.data.roomDetail)
+  //  })
     
       return x
   },
@@ -107,9 +107,12 @@ Page({
 
   redirect:function(){
     var schedule=this.data.roomSchedule
-    var date=this.data.date
+    var date=this.data.date,
+    pId=this.data.pId,rId=this.data.rId,
+    priority=this.data.priority
+    var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+pId+'&rId='+rId+'&priority='+priority
     wx.redirectTo({
-      url:'/pages/timeSet/timeSet?schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date),
+      url:'/pages/timeSet/timeSet?'+para,
       fail:res=>{
         console.log(res)
       }

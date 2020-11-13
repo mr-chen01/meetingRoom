@@ -1,5 +1,4 @@
-// pages/test/test.js
-
+// pages/calendar/calendar.js
 const dayjs=require('dayjs');
 
 Page({
