@@ -282,13 +282,18 @@ Page({
     },
     
     formSubmit: function (e) {
-      console.log('form发生了submit事件，携带数据为：', e.detail.value)
+      var that=this
       var end=e.detail.value.endtime,
       start=e.detail.value.starttime,
       eRange=this.data.eRange,
       sRange=this.data.sRange,
       title=e.detail.value.title,
-      organiser=e.detail.value.organiser
+      organiser=e.detail.value.organiser,
+      date=this.data.date,
+      pId=this.data.pId,
+      rId=this.data.rId,
+      priority=this.data.priority,schedule,
+      s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -297,7 +302,7 @@ Page({
             console.log("输入框判断失败")
           }
         })
-      }else if(eRange[0][end[0]]==sRange[0][start[0]]&&eRange[1][end[1]]-sRange[1][start[1]]){
+      }else if(e.h==s.h&&e.m-s.m){
         wx.showToast({
           title: '小于30分钟',
           image: '/image/warning.png',
@@ -306,8 +311,25 @@ Page({
           }
         })
       }else{
-
+        schedule={s,e}
+        wx.cloud.init()
+        wx.cloud.callFunction({
+          name:'book',
+          data:{
+            date:date,
+            organiser:organiser,
+            pId:pId,
+            priority:priority,
+            rId:rId,
+            schedule:schedule,
+            title:title
+          }
+        })
+        .then(res=>{
+          console.log('success')
+          })
       }
     },
     
 })
+
