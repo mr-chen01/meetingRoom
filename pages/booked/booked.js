@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date:{year:2020,month:9,date:29},
+    date:{year:'2020',month:'9',date:'29'},
     roomDetail:[],
     roomSchedule:[]
   },
@@ -86,6 +86,9 @@ Page({
       that.setData({
         roomDetail:res.result.data
       })
+   })
+   .then(()=>{
+     console.log(that.data.roomDetail)
    })
     
       return x

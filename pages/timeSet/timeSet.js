@@ -22,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    console.log(options)
     that.setData({
       roomSchedule:JSON.parse(options.schedule),
       date:JSON.parse(options.date)
@@ -118,6 +119,7 @@ Page({
               spareTime:spare
             }
           )
+          console.log(this.data.spareTime)
    },
 
    startTime:function(){
@@ -256,30 +258,6 @@ Page({
       }
       this.setData(data);
     },
-
-    roomSchedule:function(){//从数据库中获取roomDeatil
-      var that=this
-      var x
-      wx.cloud.init()
-      x=wx.cloud.callFunction({
-        name: 'roomDetail',
-        data:{
-          year:that.data.year,
-          month: that.data.month,
-          date:that.data.date
-        },
-      })
-      // .then(res => {
-      //   that.setData({
-      //     roomDetail:res.result.data[0],
-      //     roomSchedule:res.result.data[0].schedule
-      //   })
-      // })
-      .then(res=>{
-        console.log(res.result.data)
-      })
-        return x
-    },
     
     formSubmit: function (e) {
       var that=this
@@ -293,7 +271,9 @@ Page({
       pId=this.data.pId,
       rId=this.data.rId,
       priority=this.data.priority,schedule,
-      s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
+      s={h:sRange[0][start[0]].toString(),m:sRange[1][start[1]].toString()},e={h:eRange[0][end[0]].toString(),m:eRange[1][end[1]].toString()}
+
+
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -302,7 +282,7 @@ Page({
             console.log("输入框判断失败")
           }
         })
-      }else if(e.h==s.h&&e.m-s.m){
+      }else if(e.h==s.h&&e.m-s.m<30){
         wx.showToast({
           title: '小于30分钟',
           image: '/image/warning.png',
