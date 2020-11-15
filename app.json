@@ -4,8 +4,6 @@
     "pages/booked/booked",
     "pages/timeSet/timeSet",
     "pages/test2/test2",
-    "pages/logs/logs",
-    "pages/index/index",
     "pages/meetingroom/meetingroom"
   ],
   "window": {
