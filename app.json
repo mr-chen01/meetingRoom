@@ -6,7 +6,10 @@
     "pages/test2/test2",
     "pages/logs/logs",
     "pages/index/index",
-    "pages/meetingroom/meetingroom"
+    "pages/meetingroom/meetingroom",
+    "pages/myPage1/myPage1",
+    "pages/myPage2/myPage2",
+    "pages/myPage3/myPage3"
   ],
   "window": {
     "backgroundTextStyle": "light",

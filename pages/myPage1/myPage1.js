@@ -1,4 +1,4 @@
-// pages/booked.js
+// pages/myPage1/myPage1.js
 Page({
 
   /**
