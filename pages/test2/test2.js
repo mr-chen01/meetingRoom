@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    parameter: [{ id: 1, name: '银色' }, { id: 2, name: '白色' },{ id: 3, name: '黑色' }],
+    list:['我的信息','我的预定','关于我们'],
   },
 
   /**
@@ -14,7 +14,13 @@ Page({
   onLoad: function (options) {
     
   },
-
+  goPage(e){
+    const index=e.currentTarget.dataset.index+1;  //数组第一位为0
+    const url="/pages/myPage"+index+"/myPage"+index;
+    wx.navigateTo({
+      url: url,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
