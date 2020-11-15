@@ -21,11 +21,15 @@ exports.main = async (event, context) => {
     .orderBy('schedule.s.m','asc')
     .get({
       success: function (res) {
-        return res
+        console.log(res)
       }
-    });
+    })
+    .then(()=>{
+      console.log(res)
+    })
   } catch (e) {
     console.error(e);
+    
   }
 
 }

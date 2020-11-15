@@ -26,7 +26,6 @@ Page({
       pId:options.pId,
       rId:options.rId
     })
-    console.log(this.data)
     var x=this.roomDetail()
     x.then(()=>{
       that.roomSchedule()

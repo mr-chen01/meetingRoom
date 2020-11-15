@@ -22,9 +22,8 @@ Page({
    */
   onLoad: function (options) {
     var that=this
-    console.log(options)
     that.setData({
-      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):that.data.roomSchedule,
+      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
       date:JSON.parse(options.date),
       pId:options.pId,
       rId:options.rId,
@@ -100,21 +99,22 @@ Page({
     var spare=[]
     let temp
     let sRange=[]
-    temp=schedule[0]
+    temp=Object.assign({},schedule[0])
       for(let j=0;j<schedule.length;j++)
       {  
           if(schedule[j+1]!=null && schedule[j].e.h==schedule[j+1].s.h&&schedule[j].e.m==schedule[j+1].s.m){
-              temp.s=schedule[j+1].e
+              temp.s=Object.assign({},schedule[j+1].e)
             }
             else if(schedule[j+1]==null&&temp.e.h!='20'){
-              temp.e={h:20,m:'00'}
+              temp.s=Object.assign({},schedule[j].e)
+              temp.e={h:'20',m:'00'}
               spare.push(temp)
               temp=schedule[j+1]
             }
             else{
-              temp.e=schedule[j+1].s
+              temp.e=Object.assign({},schedule[j+1].s)
               spare.push(temp)
-              temp=schedule[j+1]
+              temp=Object.assign({},schedule[j+1])
             }
       }
           this.setData(
@@ -122,7 +122,6 @@ Page({
               spareTime:spare
             }
           )
-
    },
 
    startTime:function(){
@@ -138,13 +137,13 @@ Page({
         let temp=sh[i]
         if(i!=0&&sh[i]==eh[i-1])
           temp++
-        while(temp<=eh[i]){
-          sRangeH.push(temp)
+        while(Number(temp)<=Number(eh[i])){
+          sRangeH.push(temp+'')
           temp++
         }
       } 
       sRange[0]=sRangeH
-      for(let i=0;i<sRangeH.length;i++){//分钟
+      for(let i=0;i<Number(sRangeH.length);i++){//分钟
         let temp=[]
         for(let j=0;j<spare.length;j++){
           if(sRangeH[i]==spare[j].s.h){//头
@@ -154,7 +153,7 @@ Page({
                   if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m)
+                    temp.push(m+'')
                 }
               sRangeM.push(temp)
               break
@@ -165,18 +164,18 @@ Page({
                 if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m)
+                    temp.push(m+'')
               }
               sRangeM.push(temp)
               break
             }
-          } else if(sRangeH[i]>spare[j].s.h&&sRangeH[i]<spare[j].e.h){//中间
+          } else if(Number(sRangeH[i])>Number(spare[j].s.h)&&Number(sRangeH[i])<Number(spare[j].e.h)){//中间
             for(let m=0;m<60;m+=10)
             {
               if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m)
+                    temp.push(m+'')
             }
             sRangeM.push(temp)
             break
@@ -187,7 +186,7 @@ Page({
                 if(m==0)
                 temp.push('00')
               else
-                temp.push(m)
+                temp.push(m+'')
             }
             sRangeM.push(temp)
             break
@@ -221,13 +220,18 @@ Page({
   },
 
   endTime:function(){
-    var sRange=this.data.sRange,sIndex=this.data.sIndex,spare=this.data.spareTime,eRange=[[],[]],eRangeM=[],sRangeM=this.data.sRangeM.concat(), eIndex=this.data.eIndex
-    var startH=sRange[0][sIndex[0]],startM=sRange[1][sIndex[1]]
+    var sRange=this.data.sRange,
+    sIndex=this.data.sIndex,
+    spare=this.data.spareTime,
+    eRange=[[],[]],
+    eRangeM=[],sRangeM=this.data.sRangeM.concat(), eIndex=this.data.eIndex
+    var startH=sRange[0][sIndex[0]],
+    startM=sRange[1][sIndex[1]]
     var i=0,id=sIndex[0]
     while(i<spare.length){//抽出空闲时间段开始时间以及以后的时间段
-      if(spare[i].s.h<=startH&&spare[i].e.h>=startH){
-        for(let j=startH;j<=spare[i].e.h;j++){
-          eRange[0].push(j)
+      if(Number(spare[i].s.h)<=Number(startH)&&Number(spare[i].e.h)>=Number(startH)){
+        for(let j=startH;Number(j)<=Number(spare[i].e.h);j++){
+          eRange[0].push(j.toString())
           eRangeM.push(sRangeM[id].concat())
           id++
         }
@@ -311,6 +315,14 @@ Page({
         .then(res=>{
           console.log('success')
           })
+          wx.cloud.callFunction({
+            name:'spareTime',
+            data:{
+              date:date,
+              rId:rId
+            }
+          })
+          
       }
       
     },
