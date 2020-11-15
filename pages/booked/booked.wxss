@@ -3,6 +3,13 @@ page{
   background-color:#F5F5F5;
 }
 
+.none{
+  height:inherit;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
 .container{
   width:750rpx;
   height:1185rpx;

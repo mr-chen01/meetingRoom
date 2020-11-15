@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+<<<<<<< HEAD
     date:{year:"2020",month:"9",date:"29"},
+=======
+    date:{year:'2020',month:'9',date:'29'},
+    pId:1,
+    rId:1,
+>>>>>>> guang
     roomDetail:[],
     roomSchedule:[],
     pId:'1',
@@ -18,6 +24,16 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    this.setData({
+      date:{
+        year:options.year,
+        month:options.month,
+        date:options.date,
+      },
+      pId:options.pId,
+      rId:options.rId
+    })
+    console.log(this.data)
     var x=this.roomDetail()
     x.then(()=>{
       that.roomSchedule()
@@ -82,7 +98,8 @@ Page({
       data:{
         year:that.data.date.year,
         month: that.data.date.month,
-        date:that.data.date.date
+        date:that.data.date.date,
+        rId:that.data.rId
       },
     })
     .then(res=>{
@@ -90,6 +107,9 @@ Page({
         roomDetail:res.result.data
       })
    })
+  //  .then(()=>{
+  //    console.log(that.data.roomDetail)
+  //  })
     
       return x
   },
@@ -110,7 +130,11 @@ Page({
     var date=this.data.date,
     pId=this.data.pId,rId=this.data.rId,
     priority=this.data.priority
+<<<<<<< HEAD
     var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+JSON.stringify(pId)+'&rId='+JSON.stringify(pId)+'&priority='+JSON.stringify(priority)
+=======
+    var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+pId+'&rId='+rId+'&priority='+priority
+>>>>>>> guang
     wx.redirectTo({
       url:'/pages/timeSet/timeSet?'+para,
       fail:res=>{

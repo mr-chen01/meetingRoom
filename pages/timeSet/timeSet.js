@@ -11,7 +11,7 @@ Page({
     sRangeM:[],
     eIndex:['0','0'],
     eRange:[['8','9','10','11','12','13','14','15','16','17','18','19','20'],['00','10','20','30','40','50','60']],
-    roomSchedule:[],
+    roomSchedule:[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
     spareTime:[],
     startTime:{},
     roomDetail:[],
@@ -25,12 +25,21 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    console.log(options)
     that.setData({
+<<<<<<< HEAD
       roomSchedule:JSON.parse(options.schedule),
       date:JSON.parse(options.date),
       pId:JSON.parse(options.pId),
       rId:JSON.parse(options.rId),
       priority:JSON.parse(options.priority),
+=======
+      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):that.data.roomSchedule,
+      date:JSON.parse(options.date),
+      pId:options.pId,
+      rId:options.rId,
+      priority:options.priority,
+>>>>>>> guang
     })
     that.spareTime()
     that.startTime()
@@ -124,6 +133,7 @@ Page({
               spareTime:spare
             }
           )
+
    },
 
    startTime:function(){
@@ -275,7 +285,13 @@ Page({
       pId=this.data.pId,
       rId=this.data.rId,
       priority=this.data.priority,schedule,
+<<<<<<< HEAD
       s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
+=======
+      s={h:sRange[0][start[0]].toString(),m:sRange[1][start[1]].toString()},e={h:eRange[0][end[0]].toString(),m:eRange[1][end[1]].toString()}
+
+
+>>>>>>> guang
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -284,7 +300,11 @@ Page({
             console.log("输入框判断失败")
           }
         })
+<<<<<<< HEAD
       }else if(e.h==s.h&&e.m-s.m){
+=======
+      }else if(e.h==s.h&&e.m-s.m<30){
+>>>>>>> guang
         wx.showToast({
           title: '小于30分钟',
           image: '/image/warning.png',
@@ -314,3 +334,4 @@ Page({
     },
     
 })
+

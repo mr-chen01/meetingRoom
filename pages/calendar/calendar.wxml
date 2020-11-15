@@ -1,4 +1,4 @@
-<!--pages/test/test.wxml-->
+<!--pages/calendar/calendar.wxml-->
 <view class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
   <view style="font-size: 50rpx;width:750rpx">
     {{year}}年{{month+1}}月
@@ -24,7 +24,7 @@
     </view>
 </view>
 <view class="bookcontainer">
-  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}'>
+  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
   <text>{{item.name}}</text>
   <text class="state">{{item.state==1?"有":"满"}}</text>
   </view>
