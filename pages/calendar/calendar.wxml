@@ -24,7 +24,7 @@
     </view>
 </view>
 <view class="bookcontainer">
-  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}'>
+  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
   <text>{{item.name}}</text>
   <text class="state">{{item.state==1?"有":"满"}}</text>
   </view>

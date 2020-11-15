@@ -6,6 +6,8 @@ Page({
    */
   data: {
     date:{year:'2020',month:'9',date:'29'},
+    pId:1,
+    rId:1,
     roomDetail:[],
     roomSchedule:[]
   },
@@ -15,6 +17,16 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    this.setData({
+      date:{
+        year:options.year,
+        month:options.month,
+        date:options.date,
+      },
+      pId:options.pId,
+      rId:options.rId
+    })
+    console.log(this.data)
     var x=this.roomDetail()
     x.then(()=>{
       that.roomSchedule()
@@ -79,7 +91,8 @@ Page({
       data:{
         year:that.data.date.year,
         month: that.data.date.month,
-        date:that.data.date.date
+        date:that.data.date.date,
+        rId:that.data.rId
       },
     })
     .then(res=>{

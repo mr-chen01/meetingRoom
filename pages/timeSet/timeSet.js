@@ -11,7 +11,7 @@ Page({
     sRangeM:[],
     eIndex:['0','0'],
     eRange:[['8','9','10','11','12','13','14','15','16','17','18','19','20'],['00','10','20','30','40','50','60']],
-    roomSchedule:[],
+    roomSchedule:[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
     spareTime:[],
     startTime:{},
     roomDetail:[]
@@ -24,7 +24,7 @@ Page({
     var that=this
     console.log(options)
     that.setData({
-      roomSchedule:JSON.parse(options.schedule),
+      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):that.data.roomSchedule,
       date:JSON.parse(options.date),
       pId:options.pId,
       rId:options.rId,

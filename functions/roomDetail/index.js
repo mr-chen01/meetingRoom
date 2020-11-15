@@ -12,8 +12,9 @@ exports.main = async (event, context) => {
         date:{
           year:event.year,
           month:event.month,
-          date:event.date
+          date:event.date,
         },
+        rId:event.rId
     })
     .orderBy('schedule.s.h','asc')
     .orderBy('schedule.s.m','asc')

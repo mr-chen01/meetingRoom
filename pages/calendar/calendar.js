@@ -16,7 +16,8 @@ Page({
     allday:[],
     touchS : [0,0],
     touchE : [0,0],
-    meetingRoom:[{name:'会议室1',state:1},{name:'会议室2',state:0},{name:'会议室3',state:1},{name:'会议室4',state:1}]
+    meetingRoom:[{name:'会议室1',state:1,id:'1',pId:'1'},{name:'会议室2',state:1,id:'2',pId:'1'},{name:'会议室3',state:1,id:'3',pId:'1'},{name:'会议室4',state:1,id:'4',pId:'2'}],
+    picked:null
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
    */
   onLoad: function (options) {
     var day=dayjs().clone();//获取时间
+    this.setData({
+      picked:day.date()
+    })
     this.showdate(day);
   },
 
@@ -83,11 +87,11 @@ Page({
     var last=dayjs().set('month',day.month()-1).endOf('month').date();
     var templ=Object.assign(this.data.left);
     for(var i=day.startOf('month').day()-1;i>=0;i--)  
-      templ.push(" ");//上月
+      templ.push(" ");//上月尾日
 
     for(var i=1;i<=day.endOf('month').date();i++)
     {
-      if((i<day.date()&&dayjs().month()==day.month())||(day.month()<dayjs().month()&&dayjs().year==day.year()))
+      if((i<day.date()&&dayjs().month()==day.month())||(day.month()<dayjs().month()&&dayjs().year()==day.year()))
       temp.push({day:i,id:-1});
       else if(i==day.date()&&dayjs().month()==day.month())
       temp.push({day:i,id:0});
@@ -124,7 +128,8 @@ Page({
       }
     }
     that.setData({
-      allday: alldayList
+      allday: alldayList,
+      picked:this_checked
     })
   },
 
@@ -164,9 +169,15 @@ Page({
 
   },
 
-  pageTo:function(){
+  pageTo:function(e){
+    var year=this.data.year,
+    month=this.data.month+1,
+    date=this.data.picked,
+    rId=e.currentTarget.dataset.data.id,
+    pId=e.currentTarget.dataset.data.pId,
+    para='year='+year.toString()+'&month='+month.toString()+'&date='+date.toString()+'&rId='+rId+'&pId='+pId
     wx.navigateTo({
-      url: "/pages/meetingroom/meetingroom"
+      url: "/pages/booked/booked?"+para
     })
   }
 
