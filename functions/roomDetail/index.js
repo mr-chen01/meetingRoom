@@ -10,11 +10,15 @@ exports.main = async (event, context) => {
     //order
       return await db.collection('room_detail').where({
         date:{
-          year:event.year.toString(),
-          month:event.month.toString(),
-          date:event.date.toString()
+          year:event.year,
+          month:event.month,
+          date:event.date,
         },
-    }).get({
+        rId:event.rId
+    })
+    .orderBy('schedule.s.h','asc')
+    .orderBy('schedule.s.m','asc')
+    .get({
       success: function (res) {
         return res
       }

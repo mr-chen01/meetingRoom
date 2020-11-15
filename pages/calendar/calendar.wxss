@@ -1,4 +1,4 @@
-/* pages/test/test.wxss */
+/* pages/calendar/calendar.wxss */
 .container{
   padding:0;
   width:750rpx;

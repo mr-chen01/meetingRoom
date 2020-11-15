@@ -11,10 +11,13 @@ Page({
     sRangeM:[],
     eIndex:['0','0'],
     eRange:[['8','9','10','11','12','13','14','15','16','17','18','19','20'],['00','10','20','30','40','50','60']],
-    roomSchedule:[],
+    roomSchedule:[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
     spareTime:[],
     startTime:{},
-    roomDetail:[]
+    roomDetail:[],
+    pId:'',
+    rId:'',
+    priority:null,
   },
 
   /**
@@ -22,9 +25,21 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    console.log(options)
     that.setData({
+<<<<<<< HEAD
       roomSchedule:JSON.parse(options.schedule),
-      date:JSON.parse(options.date)
+      date:JSON.parse(options.date),
+      pId:JSON.parse(options.pId),
+      rId:JSON.parse(options.rId),
+      priority:JSON.parse(options.priority),
+=======
+      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):that.data.roomSchedule,
+      date:JSON.parse(options.date),
+      pId:options.pId,
+      rId:options.rId,
+      priority:options.priority,
+>>>>>>> guang
     })
     that.spareTime()
     that.startTime()
@@ -118,6 +133,7 @@ Page({
               spareTime:spare
             }
           )
+
    },
 
    startTime:function(){
@@ -256,39 +272,26 @@ Page({
       }
       this.setData(data);
     },
-
-    roomSchedule:function(){//从数据库中获取roomDeatil
-      var that=this
-      var x
-      wx.cloud.init()
-      x=wx.cloud.callFunction({
-        name: 'roomDetail',
-        data:{
-          year:that.data.year,
-          month: that.data.month,
-          date:that.data.date
-        },
-      })
-      // .then(res => {
-      //   that.setData({
-      //     roomDetail:res.result.data[0],
-      //     roomSchedule:res.result.data[0].schedule
-      //   })
-      // })
-      .then(res=>{
-        console.log(res.result.data)
-      })
-        return x
-    },
     
     formSubmit: function (e) {
-      console.log('form发生了submit事件，携带数据为：', e.detail.value)
+      var that=this
       var end=e.detail.value.endtime,
       start=e.detail.value.starttime,
       eRange=this.data.eRange,
       sRange=this.data.sRange,
       title=e.detail.value.title,
-      organiser=e.detail.value.organiser
+      organiser=e.detail.value.organiser,
+      date=this.data.date,
+      pId=this.data.pId,
+      rId=this.data.rId,
+      priority=this.data.priority,schedule,
+<<<<<<< HEAD
+      s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
+=======
+      s={h:sRange[0][start[0]].toString(),m:sRange[1][start[1]].toString()},e={h:eRange[0][end[0]].toString(),m:eRange[1][end[1]].toString()}
+
+
+>>>>>>> guang
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -297,7 +300,11 @@ Page({
             console.log("输入框判断失败")
           }
         })
-      }else if(eRange[0][end[0]]==sRange[0][start[0]]&&eRange[1][end[1]]-sRange[1][start[1]]){
+<<<<<<< HEAD
+      }else if(e.h==s.h&&e.m-s.m){
+=======
+      }else if(e.h==s.h&&e.m-s.m<30){
+>>>>>>> guang
         wx.showToast({
           title: '小于30分钟',
           image: '/image/warning.png',
@@ -306,8 +313,25 @@ Page({
           }
         })
       }else{
-
+        schedule={s,e}
+        wx.cloud.init()
+        wx.cloud.callFunction({
+          name:'book',
+          data:{
+            date:date,
+            organiser:organiser,
+            pId:pId,
+            priority:priority,
+            rId:rId,
+            schedule:schedule,
+            title:title
+          }
+        })
+        .then(res=>{
+          console.log('success')
+          })
       }
     },
     
 })
+
