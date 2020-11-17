@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date:{year:'2020',month:'9',date:'29'},
+    date:{year:2020,month:9,date:29},
     pId:1,
     rId:1,
     roomDetail:[],
@@ -125,7 +125,7 @@ Page({
     var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+pId+'&rId='+rId+'&priority='+priority
     wx.redirectTo({
       url:'/pages/timeSet/timeSet?'+para,
-      fail:res=>{
+        fail:res=>{
         console.log(res)
       }
     })

@@ -7,11 +7,11 @@ Page({
   data: {
     date:null,
     sIndex:[0,0],
-    sRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00','10','20','30','40','50','60']],
+    sRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00',10,20,30,40,50,60]],
     sRangeM:[],
     eIndex:['0','0'],
-    eRange:[['8','9','10','11','12','13','14','15','16','17','18','19','20'],['00','10','20','30','40','50','60']],
-    roomSchedule:[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
+    eRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00',10,20,30,40,50,60]],
+    roomSchedule:[{s:{h:8,m:0},e:{h:8,m:0}}],
     spareTime:[],
     startTime:{},
     roomDetail:[]
@@ -23,7 +23,7 @@ Page({
   onLoad: function (options) {
     var that=this
     that.setData({
-      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):[{s:{h:'8',m:'00'},e:{h:'8',m:'00'}}],
+      roomSchedule:JSON.parse(options.schedule).length!=0?JSON.parse(options.schedule):[{s:{h:8,m:0},e:{h:8,m:0}}],
       date:JSON.parse(options.date),
       pId:options.pId,
       rId:options.rId,
@@ -95,6 +95,7 @@ Page({
   },
 
   spareTime:function(){ //计算当日会议室空闲时间
+    var that=this
     var schedule=this.data.roomSchedule
     var spare=[]
     let temp
@@ -102,12 +103,15 @@ Page({
     temp=Object.assign({},schedule[0])
       for(let j=0;j<schedule.length;j++)
       {  
+          temp.s=Object.assign({},schedule[j].e)
+        console.log('schedule',schedule)
           if(schedule[j+1]!=null && schedule[j].e.h==schedule[j+1].s.h&&schedule[j].e.m==schedule[j+1].s.m){
               temp.s=Object.assign({},schedule[j+1].e)
+              console.log(temp.s)
             }
-            else if(schedule[j+1]==null&&temp.e.h!='20'){
+            else if(schedule[j+1]==null&&temp.e.h!=20){
               temp.s=Object.assign({},schedule[j].e)
-              temp.e={h:'20',m:'00'}
+              temp.e={h:20,m:0}
               spare.push(temp)
               temp=schedule[j+1]
             }
@@ -122,9 +126,11 @@ Page({
               spareTime:spare
             }
           )
+          console.log(that.data.spareTime)
    },
 
    startTime:function(){
+      var that=this
       var spare=this.data.spareTime
       var sh=[],eh=[]
       var sRangeH=[],sRange=this.data.sRange,sRangeM=[]
@@ -138,35 +144,33 @@ Page({
         if(i!=0&&sh[i]==eh[i-1])
           temp++
         while(Number(temp)<=Number(eh[i])){
-          sRangeH.push(temp+'')
+          sRangeH.push(temp)
           temp++
         }
       } 
       sRange[0]=sRangeH
-      for(let i=0;i<Number(sRangeH.length);i++){//分钟
+      for(let i=0;i<sRangeH.length;i++){//分钟
         let temp=[]
         for(let j=0;j<spare.length;j++){
           if(sRangeH[i]==spare[j].s.h){//头
-            if(sRange[i]!=spare[j].e.h)
+            if(sRangeH[i]!=spare[j].e.h)
               {
                 for(let m=Number(spare[j].s.m);m<60;m+=10){
                   if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m+'')
+                    temp.push(m)
                 }
-              sRangeM.push(temp)
               break
             }else
               {
-                for(Number(spare[j].s.m);temp<=spare[j].e.h;m+=10)
+                for(m=Number(spare[j].s.m);m<=spare[j].e.h;m+=10)
               {
                 if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m+'')
+                    temp.push(m)
               }
-              sRangeM.push(temp)
               break
             }
           } else if(Number(sRangeH[i])>Number(spare[j].s.h)&&Number(sRangeH[i])<Number(spare[j].e.h)){//中间
@@ -175,9 +179,8 @@ Page({
               if(m==0)
                     temp.push('00')
                   else
-                    temp.push(m+'')
+                    temp.push(m)
             }
-            sRangeM.push(temp)
             break
           }
           else if(sRangeH[i]==spare[j].e.h){//尾
@@ -186,15 +189,13 @@ Page({
                 if(m==0)
                 temp.push('00')
               else
-                temp.push(m+'')
+                temp.push(m)
             }
-            sRangeM.push(temp)
-            break
-          }
-            
+          } 
               }
           else continue
             }
+            sRangeM.push(temp)
         }
         sRange[1]=sRangeM[0]
       this.setData(
@@ -203,6 +204,7 @@ Page({
           sRangeM:sRangeM
         }
       )
+      console.log('sRange',that.data.sRange)
    },
 
    startTimeHourChange:function(e){
@@ -231,7 +233,7 @@ Page({
     while(i<spare.length){//抽出空闲时间段开始时间以及以后的时间段
       if(Number(spare[i].s.h)<=Number(startH)&&Number(spare[i].e.h)>=Number(startH)){
         for(let j=startH;Number(j)<=Number(spare[i].e.h);j++){
-          eRange[0].push(j.toString())
+          eRange[0].push(j)
           eRangeM.push(sRangeM[id].concat())
           id++
         }
@@ -278,9 +280,9 @@ Page({
       pId=this.data.pId,
       rId=this.data.rId,
       priority=this.data.priority,schedule,
-      s={h:sRange[0][start[0]].toString(),m:sRange[1][start[1]].toString()},e={h:eRange[0][end[0]].toString(),m:eRange[1][end[1]].toString()}
+      s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
 
-
+      console.log('s',s,'e',e)
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -313,19 +315,39 @@ Page({
           }
         })
         .then(res=>{
-          console.log('success')
+          console.log(res)
           })
-          wx.cloud.callFunction({
-            name:'spareTime',
-            data:{
-              date:date,
-              rId:rId
-            }
-          })
-          
+        .then(()=>{
+          that.test()
+        })
       }
       
     },
-    
+
+    test:function(){  //判断该会议室是否空闲 为否更新roomDetail的state
+      var that=this
+      wx.cloud.init()
+      wx.cloud.callFunction({
+        name: 'roomDetail',
+        data:{
+          year:that.data.date.year,
+          month: that.data.date.month,
+          date:that.data.date.date,
+          rId:that.data.rId
+        },
+      })
+      .then(res=>{
+        that.setData({
+          roomDetail:res.result.data
+        })
+        console.log(that.data.roomDetail)
+     })
+      .then(()=>{
+        that.spareTime()
+      })
+      .then(()=>{
+        console.log(that.data.spareTime)
+      })
+    },
 })
 

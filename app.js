@@ -6,6 +6,12 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+    wx.cloud.init({
+      // 此处请填入环境 ID, 环境 ID 可打开云控制台查看
+      env: 'time-4ght63yd102c1fcf',
+      traceUser: true,
+    })
+
     // 登录
     wx.login({
       success: res => {

@@ -6,7 +6,7 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  db.collection('room_detail').add({
+  return await db.collection('room_detail').add({
     data:{
       date:event.date,
       organiser:event.organiser,
