@@ -29,6 +29,7 @@ Page({
       picked:day.date()
     })
     this.showdate(day);
+    this.getDetail()
   },
 
   /**
@@ -167,6 +168,32 @@ Page({
       this.nextmonth()
     }
 
+  },
+
+  getDetail:function(){
+    var that=this,
+    meetingRoom=this.data.meetingRoom,
+    state=[]
+    for(let x=0;x<meetingRoom.length;x++){
+      wx.cloud.init()
+      wx.cloud.callFunction({
+      name:'roomDetail',
+      data:{
+      year:that.data.year.toString(),
+      month:(that.data.month+1).toString(),
+      date:that.data.picked.toString(),
+      rId:(x+1).toString()
+      }
+    })
+    .then(res=>{
+      if(res.result.data.length!=0)
+      {  console.log(x,res.result.data)
+        meetingRoom[x].state=res.result.data[0].state
+        that.setData({
+          meetingRoom:meetingRoom
+        })}
+    })
+   }
   },
 
   pageTo:function(e){

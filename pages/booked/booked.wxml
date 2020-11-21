@@ -5,8 +5,8 @@
   </view>
   <view class="single" wx:for="{{roomDetail}}">
     <view class='time'>
-      <text>{{item.schedule.s.h}}:{{item.schedule.s.m}}</text>
-      <text>{{item.schedule.e.h}}:{{item.schedule.e.m}}</text>
+      <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
+      <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
     </view>
     <view class='body'>
       <text>{{item.title}}</text>

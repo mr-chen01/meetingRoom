@@ -8,23 +8,21 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
-  try{
-    db.collection('room_detail').where({
-      date:{
-        year:event.year,
-        month:event.month,
-        date:event.date,
-      },
-      rId:event.rId
-  }).({
+    return await db.collection('room_detail').where({
+          date:{
+            year:event.date.year,
+            month:event.date.month,
+            date:event.date.date,
+          },
+          rId:event.rId
+      }).update({
+        data:{
+          state:event.state
+        },
+        complete:res=>{
+          
+          return res
+        }
+      })
 
-  })
-  }
-
-  return {
-    event,
-    openid: wxContext.OPENID,
-    appid: wxContext.APPID,
-    unionid: wxContext.UNIONID,
-  }
 }

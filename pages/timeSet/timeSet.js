@@ -7,10 +7,10 @@ Page({
   data: {
     date:null,
     sIndex:[0,0],
-    sRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00',10,20,30,40,50,60]],
+    sRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],[0,10,20,30,40,50,60]],
     sRangeM:[],
     eIndex:['0','0'],
-    eRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],['00',10,20,30,40,50,60]],
+    eRange:[[8,9,10,11,12,13,14,15,16,17,18,19,20],[0,10,20,30,40,50,60]],
     roomSchedule:[{s:{h:8,m:0},e:{h:8,m:0}}],
     spareTime:[],
     startTime:{},
@@ -98,27 +98,37 @@ Page({
     var that=this
     var schedule=this.data.roomSchedule
     var spare=[]
-    let temp
+    let temp={}
     let sRange=[]
-    temp=Object.assign({},schedule[0])
+    temp=JSON.parse(JSON.stringify(schedule[0]))
+    console.log('temp',schedule)
+    if(schedule[0].s.h!=8||schedule[0].s.m!=0){//若开始时未空闲
+      temp.e.h=temp.s.h
+      temp.e.m=temp.s.m
+      temp.s.h=8
+      temp.s.m=0
+      spare.push(Object.assign({},temp))
+      console.log('1',spare)
+      console.log(schedule[0])
+    }
       for(let j=0;j<schedule.length;j++)
       {  
-          temp.s=Object.assign({},schedule[j].e)
+          temp.s=JSON.parse(JSON.stringify(schedule[j].e))
         console.log('schedule',schedule)
           if(schedule[j+1]!=null && schedule[j].e.h==schedule[j+1].s.h&&schedule[j].e.m==schedule[j+1].s.m){
-              temp.s=Object.assign({},schedule[j+1].e)
-              console.log(temp.s)
+              temp.s=JSON.parse(JSON.stringify(schedule[j+1].e))
+              console.log('temp.s',temp.s)
             }
-            else if(schedule[j+1]==null&&temp.e.h!=20){
-              temp.s=Object.assign({},schedule[j].e)
+            else if(schedule[j+1]==null){
+              temp.s=JSON.parse(JSON.stringify(schedule[j].e))
               temp.e={h:20,m:0}
-              spare.push(temp)
-              temp=schedule[j+1]
+              spare.push(Object.assign({},temp))
+              console.log('2',spare)
             }
             else{
-              temp.e=Object.assign({},schedule[j+1].s)
-              spare.push(temp)
-              temp=Object.assign({},schedule[j+1])
+              temp.e=JSON.parse(JSON.stringify(schedule[j+1].s))
+              spare.push(Object.assign({},temp))
+              temp=JSON.parse(JSON.stringify(schedule[j+1]))
             }
       }
           this.setData(
@@ -126,7 +136,7 @@ Page({
               spareTime:spare
             }
           )
-          console.log(that.data.spareTime)
+          console.log('spare',that.data.spareTime)
    },
 
    startTime:function(){
@@ -164,10 +174,10 @@ Page({
               break
             }else
               {
-                for(m=Number(spare[j].s.m);m<=spare[j].e.h;m+=10)
+                for(let m=Number(spare[j].s.m);m<=spare[j].e.m;m+=10)
               {
                 if(m==0)
-                    temp.push('00')
+                    temp.push(0)
                   else
                     temp.push(m)
               }
@@ -177,7 +187,7 @@ Page({
             for(let m=0;m<60;m+=10)
             {
               if(m==0)
-                    temp.push('00')
+                    temp.push(0)
                   else
                     temp.push(m)
             }
@@ -187,7 +197,7 @@ Page({
             {
               for(let m=0;m<=spare[j].e.m;m+=10){
                 if(m==0)
-                temp.push('00')
+                temp.push(0)
               else
                 temp.push(m)
             }
@@ -228,10 +238,16 @@ Page({
     eRange=[[],[]],
     eRangeM=[],sRangeM=this.data.sRangeM.concat(), eIndex=this.data.eIndex
     var startH=sRange[0][sIndex[0]],
-    startM=sRange[1][sIndex[1]]
+    startM=Number(sRange[1][sIndex[1]])
     var i=0,id=sIndex[0]
+    console.log('startM',startM)
     while(i<spare.length){//抽出空闲时间段开始时间以及以后的时间段
       if(Number(spare[i].s.h)<=Number(startH)&&Number(spare[i].e.h)>=Number(startH)){
+        console.log(spare[i])
+        if((Number(spare[i].e.h)==Number(startH)&&Number(spare[i].e.m)<=Number(startM))){
+          i++
+          continue
+        }
         for(let j=startH;Number(j)<=Number(spare[i].e.h);j++){
           eRange[0].push(j)
           eRangeM.push(sRangeM[id].concat())
@@ -241,8 +257,17 @@ Page({
       }
       i++
     }
-    for(let temp=eRangeM[0][0];temp<=startM;temp+=10){
+    for(let temp=Number(eRangeM[0][0]);temp<=startM;temp=eRangeM[0][0]){//头
       eRangeM[0].splice(0,1)
+    }
+    var l1=eRangeM.length-1,l2=eRangeM[l1].length-1
+    if(spare[i+1]!=null&&Number(spare[i].e.h)==Number(spare[i+1].s.h)){
+      console.log('spare[i].e.h',Number(spare[i].e.h))
+      for(let temp2=Number(eRangeM[l1][l2]); temp2>Number(spare[i].e.m);temp2=eRangeM[l1][l2]){//尾
+        eRangeM[l1].splice(l2,1)
+        l2=eRangeM[l1].length-1
+        console.log(eRangeM[l1])
+      }
     }
     eIndex=[0,0]
     eRange[1]=eRangeM[0]
@@ -253,6 +278,7 @@ Page({
         eIndex:eIndex
       }
       )
+      console.log('eRangeM',this.data.eRangeM,'sRangeM',this.data.sRangeM)
     },
 
     endTimeHourChange:function(e){
@@ -314,18 +340,25 @@ Page({
             title:title
           }
         })
-        .then(res=>{
-          console.log(res)
-          })
         .then(()=>{
           that.test()
         })
-      }
-      
+        .then(()=>{
+          wx.showToast({
+            title: '预定会议室成功',
+            image: '/image/success.png',
+          })
+          setTimeout(()=>{
+            wx.reLaunch({
+            url: "/pages/calendar/calendar"
+          })
+        },2000)
+      })
+    }
     },
 
     test:function(){  //判断该会议室是否空闲 为否更新roomDetail的state
-      var that=this
+      var that=this,detail,schedule=[]
       wx.cloud.init()
       wx.cloud.callFunction({
         name: 'roomDetail',
@@ -337,16 +370,40 @@ Page({
         },
       })
       .then(res=>{
+        detail=res.result.data
+        for(let x=0;x<detail.length;x++){
+          schedule.push(detail[x].schedule)
+        }
         that.setData({
-          roomDetail:res.result.data
-        })
-        console.log(that.data.roomDetail)
+          roomSchedule:schedule
+        })  
+        console.log('roomDetail',that.data.roomDetail)
      })
       .then(()=>{
         that.spareTime()
       })
       .then(()=>{
-        console.log(that.data.spareTime)
+        var spare=that.data.spareTime,state=1,
+        date=this.data.date,rId=this.data.rId
+        console.log('spareTime',that.data.spareTime)
+        for(let x=0;x<spare.length;x++){
+          console.log((spare[x].s.h==spare[x].e.h&&spare[x].e.m-spare[x].s.m<30)||(spare[x].s.h+1==spare[x].e.h&&spare[x].s.m-spare[x].e.m<30))
+          if((spare[x].s.h==spare[x].e.h&&spare[x].e.m-spare[x].s.m<30)||(spare[x].s.h+1==spare[x].e.h&&spare[x].s.m-spare[x].e.m<30)){
+            state=0
+            wx.cloud.init()
+            wx.cloud.callFunction({
+              name:'testify',
+              data:{
+                date:date,
+                rId:rId,
+                state:state
+          }
+            }).then(res=>{
+              console.log(res)
+            })
+            break
+          }
+        }
       })
     },
 })
