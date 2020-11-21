@@ -1,7 +1,18 @@
-<!--pages/test2/test2.wxml-->
-<view class='fwb fz-28 mgt-16 mgb-10'>规格</view>
-  <view class='parameter-wrap'>
-    <block wx:for="{{parameter}}" wx:key="parameter">
-    <text class='parameter-info text-over {{item.checked?"checked_parameter":""}}' data-id='{{item.id}}' bindtap='parameterTap'>{{item.name}}</text>
-    </block>
+<view>
+  <view class="user-container">
+    <view class="user-img">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+
+    <view class="user-name">
+      <open-data type="userNickName"></open-data>
+    </view>
   </view>
+
+  <view class="list-container" wx:for="{{list}}" wx:key="*this" wx:for-index="bindex" bindtap="goPage" data-index="{{bindex}}">
+    <view class="list-item" >
+      <text>{{item}}{{bindex}}</text>
+      <image src="../../image/icon-arrow.png"></image>
+    </view>
+  </view>
+</view>

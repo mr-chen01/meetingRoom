@@ -1,7 +1,47 @@
-/* pages/test2/test2.wxss */
-.checked_parameter{
-  background: rebeccapurple;
-  padding: 3px;
-  border-radius: 5px;
-  color: #fff;
+page{
+  background: #f5f6f7;
 }
+
+.user-container{
+  text-align:center;
+  padding:40rpx 0;
+  background:#fff;
+  font-size:28rpx;
+  color:#a58969;
+  margin-bottom:20rpx;    
+}
+
+.user-img{
+  height:180rpx;
+  width:180rpx;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+}
+.user-name{
+  margin-top:30rpx;
+  font-size: 30rpx;
+}
+
+
+.list-container{
+  background:#fff;
+  border-top:1px solid #e5e5e5;
+}
+
+.list-item{
+  position:relative;
+  height:90rpx;
+  line-height:90rpx;
+  padding-left:20rpx;
+}
+
+.list-item image{
+  position:absolute;
+  height:32rpx;
+  width:32rpx;
+  top:30rpx;
+  right:36rpx;
+}
+
