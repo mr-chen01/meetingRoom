@@ -17,19 +17,24 @@ Page({
     touchS : [0,0],
     touchE : [0,0],
     meetingRoom:[{name:'会议室1',state:1,id:'1',pId:'1'},{name:'会议室2',state:1,id:'2',pId:'1'},{name:'会议室3',state:1,id:'3',pId:'1'},{name:'会议室4',state:1,id:'4',pId:'2'}],
-    picked:null
+    picked:null,
+    level:0,
+    openid:null,
+    memberRoom:[],
+    group:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this
     var day=dayjs().clone();//获取时间
     this.setData({
       picked:day.date()
     })
     this.showdate(day);
-    this.getDetail()
+    this.openid()
   },
 
   /**
@@ -132,6 +137,8 @@ Page({
       allday: alldayList,
       picked:this_checked
     })
+    that.getDetail()
+    that.memberDetail()
   },
 
   lastmonth:function(){
@@ -170,11 +177,30 @@ Page({
 
   },
 
+  openid:function(){
+    var that=this
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name:'openId'
+    })
+    .then(res=>{
+      that.setData({
+        level:res.result.data[0].level
+      })
+      //  console.log(that.data.level)
+    })
+    .then(()=>{
+      that.getDetail()
+      that.memberDetail()
+    })
+  },
+
   getDetail:function(){
     var that=this,
     meetingRoom=this.data.meetingRoom,
-    state=[]
-    for(let x=0;x<meetingRoom.length;x++){
+    state=[],
+    level=this.data.levelgetDetail
+      for(let x=0;x<meetingRoom.length;x++){
       wx.cloud.init()
       wx.cloud.callFunction({
       name:'roomDetail',
@@ -186,14 +212,67 @@ Page({
       }
     })
     .then(res=>{
-      if(res.result.data.length!=0)
-      {  console.log(x,res.result.data)
-        meetingRoom[x].state=res.result.data[0].state
-        that.setData({
-          meetingRoom:meetingRoom
-        })}
+      if(level==1){
+        if(res.result.data.length!=0)
+        {  
+          meetingRoom[x].state=res.result.data[0].state
+          that.setData({
+            meetingRoom:meetingRoom,
+          })
+        }
+      }
+      else{
+        var memberRoom=that.data.memberRoom
+        for(let i=0;i<res.result.data.length;i++)
+          {
+            let temp={
+              organiser:res.result.data[i].organiser,
+              rId:res.result.data[i].rId,
+              schedule:res.result.data[i].schedule,
+              title:res.result.data[i].title
+            }
+            memberRoom.push(temp)
+          }
+      }
+          that.setData({
+            memberRoom:memberRoom
+          })
     })
-   }
+  }
+  },
+
+  memberDetail:function(){
+    var that=this
+    var list=[]
+    that.setData({
+      memberRoom:[]
+    })
+      wx.cloud.init()
+      wx.cloud.callFunction({
+        name: 'memberDetail',
+        data:{
+          year:that.data.year.toString(),
+          month:(that.data.month+1)+'',
+          date:that.data.picked.toString()
+        }
+      })
+      .then(res=>{
+
+        console.log('res',res.result)
+        console.log(that.data.level)
+          if(that.data.level==1){
+            wx.cloud.init()
+            wx.cloud.callFunction({
+              name:'getGroup'
+            })
+            .then(res=>{
+              console.log(res.result)
+              that.setData({
+                group:res.result.data[0]
+              })
+            })
+          }
+      })   
   },
 
   pageTo:function(e){
@@ -202,11 +281,13 @@ Page({
     date=this.data.picked,
     rId=e.currentTarget.dataset.data.id,
     pId=e.currentTarget.dataset.data.pId,
-    para='year='+year.toString()+'&month='+month.toString()+'&date='+date.toString()+'&rId='+rId+'&pId='+pId
+    group=JSON.stringify(this.data.group),
+    para='year='+year.toString()+'&month='+month.toString()+'&date='+date.toString()+'&rId='+rId+'&pId='+pId+'&group='+group
     wx.navigateTo({
       url: "/pages/booked/booked?"+para
     })
-  }
+  },
+
 
 })
 

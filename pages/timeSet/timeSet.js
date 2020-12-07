@@ -14,7 +14,8 @@ Page({
     roomSchedule:[{s:{h:8,m:0},e:{h:8,m:0}}],
     spareTime:[],
     startTime:{},
-    roomDetail:[]
+    roomDetail:[],
+    group:{}
   },
 
   /**
@@ -28,7 +29,9 @@ Page({
       pId:options.pId,
       rId:options.rId,
       priority:options.priority,
+      group:options.group
     })
+    console.log('group',this.data.group)
     that.spareTime()
     that.startTime()
     that.endTime()
@@ -306,9 +309,10 @@ Page({
       pId=this.data.pId,
       rId=this.data.rId,
       priority=this.data.priority,schedule,
+      group=JSON.parse(this.data.group),
       s={h:sRange[0][start[0]],m:sRange[1][start[1]]},e={h:eRange[0][end[0]],m:eRange[1][end[1]]}
 
-      console.log('s',s,'e',e)
+      console.log('group',group)
       if(title==""||organiser==""){
         wx.showToast({
           title: '输入框为空',
@@ -337,7 +341,8 @@ Page({
             priority:priority,
             rId:rId,
             schedule:schedule,
-            title:title
+            title:title,
+            group:group
           }
         })
         .then(()=>{

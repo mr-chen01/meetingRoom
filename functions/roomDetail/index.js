@@ -6,6 +6,7 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  const wxContext = cloud.getWXContext()
   try {
     //order
       return await db.collection('room_detail').where({
@@ -13,8 +14,19 @@ exports.main = async (event, context) => {
           year:event.year,
           month:event.month,
           date:event.date,
+        }
+        .and({rId:event.rId})
+        .or([{
+          group:{
+            mangerId:wxContext.OPENID
+          }
         },
-        rId:event.rId
+        {
+          group:{
+            stuffId:_in([wxContext.OPENID])
+          }
+        }
+      ])
     })
     .orderBy('schedule.s.h','asc')
     .orderBy('schedule.s.m','asc')

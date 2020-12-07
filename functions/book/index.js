@@ -15,9 +15,10 @@ exports.main = async (event, context) => {
       rId:event.rId,
       title:event.title,
       schedule:event.schedule,
-      state:'1'
+      state:'1',
+      group:event.group
     },
-    fail:res=>{
+    complete:res=>{
       console.log(res)
     }
   })

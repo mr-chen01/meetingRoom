@@ -9,7 +9,8 @@ Page({
     pId:1,
     rId:1,
     roomDetail:[],
-    roomSchedule:[]
+    roomSchedule:[],
+    group:{}
   },
 
   /**
@@ -24,7 +25,8 @@ Page({
         date:options.date,
       },
       pId:options.pId,
-      rId:options.rId
+      rId:options.rId,
+      group:options.group
     })
     var x=this.roomDetail()
     x.then(()=>{
@@ -121,8 +123,9 @@ Page({
     var schedule=this.data.roomSchedule
     var date=this.data.date,
     pId=this.data.pId,rId=this.data.rId,
-    priority=this.data.priority
-    var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+pId+'&rId='+rId+'&priority='+priority
+    priority=this.data.priority,
+    group=this.data.group
+    var para='schedule='+JSON.stringify(schedule)+'&date='+JSON.stringify(date)+'&pId='+pId+'&rId='+rId+'&priority='+priority+'&group='+group
     wx.redirectTo({
       url:'/pages/timeSet/timeSet?'+para,
         fail:res=>{

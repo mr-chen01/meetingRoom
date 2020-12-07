@@ -24,8 +24,23 @@
     </view>
 </view>
 <view class="bookcontainer">
-  <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
-  <text>{{item.name}}</text>
-  <text class="state">{{item.state==1?"有":"满"}}</text>
+  <block wx:if="{{level==1}}">
+    <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
+    <text>{{item.name}}</text>
+    <text class="state">{{item.state==1?"有":"满"}}</text>
+    </view>
+  </block>
+  <block wx:else >
+    <view class="single" wx:for="{{memberRoom}}">
+      <view style="text-align:center">会议室1</view>
+      <view class='time'>
+        <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
+        <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
+      </view>
+      <view class='body'>
+        <text>{{item.title}}</text>
+        <text>{{item.organiser}}</text>
+      </view>
   </view>
+  </block>
 </view>
