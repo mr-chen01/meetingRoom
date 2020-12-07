@@ -1,0 +1,18 @@
+<!--pages/today/today.wxml-->
+<view class="t_top">今日日程</view>
+<view class="t_showDate">
+  <text class="t_year">{{year}}.</text>
+  <text class="t_month">{{month}}.</text>
+  <text class="t_date">{{date}}</text>
+</view>
+<view class="t_container" wx:for="{{lists}}" wx:key='item'>
+  <view class="t_meeting">
+    <view class="t_room">
+      <text>会议室{{item.rId}}</text>
+    </view>
+    <view class="t_detail">
+      <view class="t_meeting_boss">{{item.organiser}}</view>
+      <view class="t_meeting_title">{{item.title}}</view>
+    </view>
+  </view>
+</view>

@@ -6,7 +6,8 @@
     "pages/test2/test2",
     "pages/meetingroom/meetingroom",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/today/today"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,6 +19,12 @@
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "list": [
+      {
+        "pagePath":"pages/today/today",
+        "text":"日程",
+        "iconPath":"image/today.png",
+        "selectedIconPath":"image/todayselected.png"
+      },
       {
         "pagePath": "pages/calendar/calendar",
         "text": "会议室",
