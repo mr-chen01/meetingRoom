@@ -1,0 +1,59 @@
+.t_top{
+  margin: 15px auto 10px 10px;
+  font-size: 22px;
+}
+.t_showDate{
+  padding-top: 10px;
+  padding-bottom: 15px;
+  margin: auto 10px;
+}
+.t_year{
+  font-size: 19px;
+  color: #a3c4ee;
+}
+.t_month{
+  font-size: 20px;
+  color: rgb(46, 168, 206);
+}
+.t_date{
+  font-size: 20px;
+  color: rgb(46, 168, 206);
+}
+.t_meeting{
+  margin-bottom: 10px ;
+  margin-left: 10px;
+  width: 305px;
+  height: 75px;
+  border-radius:8px;
+ 
+}
+.t_room{
+ width: 70px;
+ height: 70px;
+ background-color:rgb(0, 181, 229);
+ float: left;
+ border-radius:8px;
+}
+.t_room text{
+  line-height: 70px;
+  padding-left: 7px;
+  color: white;
+  font-weight: bold;
+}
+.t_detail{
+  width: 220px;
+  height: 70px;
+  
+  margin-left: 4px;
+  display: block;
+  float: right;
+}
+.t_meeting_boss{
+  color: gray;
+  font-size: 14px;
+  padding-bottom:3px;
+}
+.t_meeting_title{
+  font-weight:bold;
+  font-size: 17px;
+}
