@@ -32,7 +32,7 @@
   </block>
   <block wx:else >
     <view class="single" wx:for="{{memberRoom}}">
-      <view style="text-align:center">会议室1</view>
+      <view style="text-align:center">会议室{{item.rId}}</view>
       <view class='time'>
         <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
         <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
