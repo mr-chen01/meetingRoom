@@ -95,7 +95,8 @@ Page({
               organiser:res.result.data[i].organiser,
               rId:res.result.data[i].rId,
               schedule:res.result.data[i].schedule,
-              title:res.result.data[i].title
+              title:res.result.data[i].title,
+              
             }
             lists.push(temp)
           }

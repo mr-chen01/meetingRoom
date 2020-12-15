@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/today/today",
     "pages/calendar/calendar",
     "pages/booked/booked",
     "pages/timeSet/timeSet",
     "pages/test2/test2",
     "pages/meetingroom/meetingroom",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/today/today"
+    "pages/logs/logs"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

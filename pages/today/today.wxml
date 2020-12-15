@@ -14,5 +14,6 @@
       <view class="t_meeting_boss">{{item.organiser}}</view>
       <view class="t_meeting_title">{{item.title}}</view>
     </view>
+    <view class="t_time"></view>
   </view>
 </view>
