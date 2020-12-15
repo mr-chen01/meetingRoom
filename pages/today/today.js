@@ -96,7 +96,12 @@ Page({
               rId:res.result.data[i].rId,
               schedule:res.result.data[i].schedule,
               title:res.result.data[i].title,
+<<<<<<< HEAD
               
+=======
+              stuffId:res.result.data[i].group.stuffId,
+              room_detail_id:res.result.data[i]._id
+>>>>>>> master
             }
             lists.push(temp)
           }
@@ -104,5 +109,17 @@ Page({
             lists:lists
           })
         })
+    },
+
+    pageTo:function(e){
+      var schedule=e.currentTarget.dataset.schedule,
+      room_detail_id=e.currentTarget.dataset.roomdetailid,
+      stuffId=e.currentTarget.dataset.stuffid,
+      para='schedule='+JSON.stringify(schedule)+'&room_detail_id='+room_detail_id+'&stuffId='+JSON.stringify(stuffId)
+      if((dayjs().hour()==schedule.s.h&&dayjs().minute()>=schedule.s.m)||(dayjs().hour()>schedule.s.h)&&(dayjs().hour()==schedule.e.h&&dayjs().minute()<=schedule.e.m)||dayjs().hour()<schedule.e.h){
+        wx.navigateTo({
+          url: "/pages/signIn/signIn?"+para
+        })
+      }
     }
 })

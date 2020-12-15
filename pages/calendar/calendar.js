@@ -200,7 +200,7 @@ Page({
     meetingRoom=this.data.meetingRoom,
     state=[],
     level=this.data.levelgetDetail
-      for(let x=0;x<meetingRoom.length;x++){
+    for(let x=0;x<meetingRoom.length;x++){
       wx.cloud.init()
       wx.cloud.callFunction({
       name:'roomDetail',

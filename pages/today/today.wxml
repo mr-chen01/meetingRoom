@@ -6,7 +6,7 @@
   <text class="t_date">{{date}}</text>
 </view>
 <view class="t_container" wx:for="{{lists}}" wx:key='item'>
-  <view class="t_meeting">
+  <view class="t_meeting" bindtap="pageTo" data-schedule='{{item.schedule}}' data-roomdetailid='{{item.room_detail_id}}' data-stuffid='{{item.stuffId}}'>
     <view class="t_room">
       <text>会议室{{item.rId}}</text>
     </view>

@@ -24,7 +24,8 @@ exports.main = async (event, context) => {
     newRoot: $.mergeObjects([ $.arrayElemAt(['$member_room', 0]), '$$ROOT' ])
   })
   .project({
-    member_room:0
+    member_room:0,
+    openid:0
   })
   .match({
     date:{

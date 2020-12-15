@@ -1,0 +1,45 @@
+<!--pages/meetingroom/meetingroom.wxml-->
+<view class='body column' style='width:{{Width}}px;height:{{Height}}px'>
+<view class='column container '>
+  <view class='list column'>
+    <view class='row' style='height:30rpx'>
+      <input style='padding-left:10rpx' confirm-type='search' name='search' bindinput="searchName"/>
+      <image class='search' src='{{src}}' bindtouchstart="imageActive" bindtouchend="imageLoose" bindtap='searchStuff'></image>
+    </view>
+    <view class='row' style='height:30rpx'>
+      <view wx:for="{{buttonList}}">
+        <button class='buttonList {{item.checked?"selected":""}}' bindtap='buttonSelceted' style='width:150rpx ;margin-right:50rpx;' data-id='{{item.id}}'>{{item.name}}</button>
+      </view>
+    </view>
+      <scroll-view
+  scroll-y style="width: inherit; height: 500rpx;margin-top:50rpx"
+  refresher-enabled="{{true}}"
+  refresher-threshold="{{80}}"
+  refresher-default-style="none"
+  refresher-background="lightgreen"
+>
+  <view slot="refresher" class="refresh-container"
+    style="display: block; width:inherit; height: 80px; background: blue; display: flex; align-items: center;"
+  >
+    <view class="view1" style="position: absolute; text-align: center; width: 100%;">
+      下拉刷新
+    </view>
+  </view>
+  <view class='listcontainer'> 
+    <view class='item' wx:for="{{buttonList[0].checked?signInedLists:unsignInLists}}" wx:if="{{listState==1}}" style='padding:1rpx'>
+    {{item}}
+    </view>
+    <view class='item' style='padding:1rpx' wx:for="{{searchList}}" wx:if="{{listState==0}}">
+      {{item}} 
+    </view>
+  </view>
+  
+</scroll-view>
+    </view>
+  <view>
+    <text>签到时间:<text style="display:inline;font-weight:normal">{{year}}年{{month}}月{{date}}日{{schedule.s.h}}:{{schedule.s.m==0?'00':schedule.s.m}}~{{schedule.e.h}}:{{schedule.e.m==0?'00':schedule.e.m}}</text></text>
+  </view>
+  <view><text>签到人数:<text style="display:inline;font-weight:normal">{{signInedLists.length}}/{{groupList.length}}</text></text></view>
+  <button style='height:100rpx;margin-bottom:20rpx'>生成签到码</button>
+</view>
+</view>

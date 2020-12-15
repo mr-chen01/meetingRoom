@@ -2,10 +2,11 @@
   "pages": [
     "pages/today/today",
     "pages/calendar/calendar",
+    "pages/signIn/signIn",
+    "pages/today/today",
     "pages/booked/booked",
     "pages/timeSet/timeSet",
-    "pages/test2/test2",
-    "pages/meetingroom/meetingroom",
+    "pages/person/person",
     "pages/index/index",
     "pages/logs/logs"
     
@@ -33,7 +34,7 @@
         "selectedIconPath": "image/tarBarSelected1.png"
       },
       {
-        "pagePath": "pages/test2/test2",
+        "pagePath": "pages/person/person",
         "text": "个人中心",
         "iconPath": "image/tarbar2.png",
         "selectedIconPath": "image/tarbarselected2.png"
