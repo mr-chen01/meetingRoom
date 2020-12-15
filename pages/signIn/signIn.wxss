@@ -1,0 +1,76 @@
+.body{
+  font-size: 40rpx;
+}
+.row{
+  display:flex;
+  flex-direction: row;
+  margin-bottom: 0rpx;
+  flex-wrap:wrap;
+}
+.column{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  margin-bottom: 0rpx;
+  flex-wrap:wrap;
+}
+.container{
+  width:inherit;
+  align-items:flex-start;
+  padding:0rpx;
+  padding-left:10rpx;
+}
+.list{
+  width:700rpx;
+  height:750rpx;
+  align-self:center;
+  border:5rpx black solid;
+  border-radius:2%;
+  margin-bottom: 50rpx;
+  padding-bottom: 0rpx;
+  justify-content: flex-start;
+  align-items: center;
+}
+input{
+  width:300rpx;
+  height:50rpx;
+  border:1rpx #C0C0C0 solid;
+  border-radius:8rpx;
+  margin-top:10rpx;
+}
+.search{
+  width:50rpx;
+  height:50rpx;
+  padding:10rpx
+}
+.container view{
+  padding-bottom:50rpx;
+}
+.container text{
+  font-weight:bold;
+}
+button{
+  width:200rpx;
+  border:1rpx black solid;
+  background-color:white;
+}
+.buttonList{
+  margin-top:0rpx;
+  padding:0rpx;
+}
+.buttonList:active{
+  background-color:	#F0E68C;
+}
+.selected{
+  background-color:	#F0E68C;
+}
+.listcontainer{
+  width:inherit;
+  padding:0rpx;
+  border-top:1rpx black solid;
+  margin:0rpx;
+  columns:100rpx 3;
+}
+.item{
+  text-align: center;
+}
