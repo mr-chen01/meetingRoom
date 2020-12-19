@@ -6,14 +6,21 @@
   <text class="t_date">{{date}}</text>
 </view>
 <view class="t_container" wx:for="{{lists}}" wx:key='item'>
-  <view class="t_meeting" bindtap="pageTo" data-schedule='{{item.schedule}}' data-roomdetailid='{{item.room_detail_id}}' data-stuffid='{{item.stuffId}}'>
+  <view class="t_meeting" bindtap="pageTo" data-schedule='{{item.schedule}}' data-roomdetailid='{{item.room_detail_id}}'
+    data-stuffid='{{item.stuffId}}'>
     <view class="t_room">
       <text>会议室{{item.rId}}</text>
     </view>
     <view class="t_detail">
       <view class="t_meeting_boss">{{item.organiser}}</view>
       <view class="t_meeting_title">{{item.title}}</view>
+      <view class="t_meeting_time">
+        <view class="t_time_end">{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</view>
+      <view class="t_time_begin">{{item.schedule.s.h<10?'0'+item.schedule.s.h:item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}-</view>
+     
     </view>
-    <view class="t_time"></view>
+    </view>
+    
+
   </view>
 </view>

@@ -3,7 +3,6 @@
     "pages/today/today",
     "pages/calendar/calendar",
     "pages/signIn/signIn",
-    "pages/today/today",
     "pages/booked/booked",
     "pages/timeSet/timeSet",
     "pages/person/person",

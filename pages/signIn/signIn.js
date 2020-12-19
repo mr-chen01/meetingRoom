@@ -48,7 +48,8 @@ Page({
       room_detail_id:options.room_detail_id,
       stuffId:JSON.parse(options.stuffId)
     })
-    that.getSignIned()
+    that.getSignIned();
+    
   },
 
   /**
