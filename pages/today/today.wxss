@@ -57,6 +57,12 @@
   font-weight:bold;
   font-size: 17px;
 }
+.t_meeting_time{
+  margin-right:30px;
+}
+.t_time_begin,.t_time_end{
+float: right;
+}
 .t_container:active{
-  background-color: #A9A9A9;
+  background-color: #a9a9a9cb;
 }
