@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/calendar/calendar",
+    "pages/today/today",
     "pages/myBooked/myBooked",
     "pages/qiandao/qiandao",
     "pages/signIn/signIn",
-    "pages/today/today",
     "pages/booked/booked",
     "pages/timeSet/timeSet",
     "pages/person/person",
