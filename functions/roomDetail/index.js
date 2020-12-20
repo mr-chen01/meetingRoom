@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
     //order
       return await db.collection('room_detail').where({
         date:{
-          year:event.year,
+          year:event.year,  
           month:event.month,
           date:event.date,
         }
