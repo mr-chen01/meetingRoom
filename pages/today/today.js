@@ -9,7 +9,8 @@ Page({
      year:'',
      month:'',
      date:'',
-     lists:[]
+     lists:[],
+     level:2,
   },
 
   /**
@@ -24,6 +25,7 @@ Page({
      month:(day.month()+1)+'',
      date:day.date().toString()
     });
+    that.getLevel()
     that.memberRoom()
   },
 
@@ -105,6 +107,19 @@ Page({
             lists:lists
           })
         })
+    },
+
+    getLevel:function(){
+      var that=this
+      wx.cloud.init()
+      wx.cloud.callFunction({
+        name:'openId',
+      })
+      .then(res=>{
+        that.setData({
+          level:res.result.data[0].level
+        })
+      })
     },
 
     pageTo:function(e){

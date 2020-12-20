@@ -9,9 +9,9 @@
     </view>
   </view>
 
-  <view class="list-container" wx:for="{{list}}" wx:key="*this" wx:for-index="bindex" bindtap="goPage" data-index="{{bindex}}">
+  <view class="list-container" wx:for="{{list}}" wx:key="*this" wx:for-index="bindex" bindtap="goPage" data-index="{{bindex}}" bindtap='pageTo'>
     <view class="list-item" >
-      <text>{{item}}{{bindex}}</text>
+      <text>{{item}}</text>
       <image src="../../image/icon-arrow.png"></image>
     </view>
   </view>

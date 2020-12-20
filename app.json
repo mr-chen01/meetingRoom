@@ -1,14 +1,16 @@
 {
   "pages": [
     "pages/calendar/calendar",
+    "pages/myBooked/myBooked",
+    "pages/qiandao/qiandao",
     "pages/signIn/signIn",
     "pages/today/today",
     "pages/booked/booked",
     "pages/timeSet/timeSet",
     "pages/person/person",
     "pages/index/index",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/personInfo/personInfo"   
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,13 +23,13 @@
   "tabBar": {
     "list": [
       {
-        "pagePath":"pages/today/today",
-        "text":"日程",
-        "iconPath":"image/today.png",
-        "selectedIconPath":"image/todayselected.png"
+        "pagePath": "pages/today/today",
+        "text": "日程",
+        "iconPath": "image/today.png",
+        "selectedIconPath": "image/todayselected.png"
       },
       {
-        "pagePath":"pages/calendar/calendar",
+        "pagePath": "pages/calendar/calendar",
         "text": "会议室",
         "iconPath": "image/tarBar1.png",
         "selectedIconPath": "image/tarBarSelected1.png"

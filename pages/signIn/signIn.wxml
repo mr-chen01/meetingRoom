@@ -39,7 +39,17 @@
   <view>
     <text>签到时间:<text style="display:inline;font-weight:normal">{{year}}年{{month}}月{{date}}日{{schedule.s.h}}:{{schedule.s.m==0?'00':schedule.s.m}}~{{schedule.e.h}}:{{schedule.e.m==0?'00':schedule.e.m}}</text></text>
   </view>
-  <view><text>签到人数:<text style="display:inline;font-weight:normal">{{signInedLists.length}}/{{groupList.length}}</text></text></view>
-  <button style='height:100rpx;margin-bottom:20rpx'>生成签到码</button>
+  <view><text>签到人数:<text style="display:inline;font-weight:normal">{{signInedLists.length}}/{{unsignInLists.length}}</text></text></view>
+  <button style='height:100rpx;margin-bottom:20rpx' bindtap='showRule'>生成签到码</button>
 </view>
+</view>
+
+<view class="bgstyle {{isRuleTrue?'isRuleShow':'isRuleHide'}}" >
+  <view class='windowContainer'>
+    <image src='{{imageSrc}}' style='width:400rpx;height:400rpx'></image>
+    <view>
+      <text style='font-weight:bold'>签到码：</text>{{signInCode}}
+    </view>
+    <image src='../../image/close.png'class='ruleHide' bindtap='hideRule'></image>
+  </view>
 </view>

@@ -1,0 +1,8 @@
+<!--pages/qiandao/qiandao.wxml-->
+<view wx:if="{{isScanf}}">
+
+</view>
+<view wx:else>
+  <input placeholder='请输入签到码' bindinput="getCode"/>
+  <button bindtap="submit" style="margin-top:30rpx">签到</button>
+</view>

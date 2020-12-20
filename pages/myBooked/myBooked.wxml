@@ -1,0 +1,26 @@
+<!--pages/myBooked/myBooked.wxml-->
+<view class='container'>
+  <view wx:if='{{roomDetail.length==0}}' class='none'>
+    <text>您暂无预约</text>
+  </view>
+  <view class="single" wx:for="{{room_detail}}"  >
+    <view class='time'>
+      <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
+      <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
+    </view>
+    <view class='body'>
+      <text>会议室{{item.rId}}</text>
+    </view>
+    <button class='cancel' style="width:200rpx;padding:0rpx" bindtap='showDelete' data-roomdetailid="{{item._id}}">取消会议</button>
+  </view>
+  <view class="bgstyle {{isDelete?'isShow':'isHide'}}">
+    <view class='windowContainer'>
+      <view class='askingArea'>
+        是否取消该会议?
+      </view>
+      <button class='pick' style='width:200rpx' bindtap='delete'>YES</button>
+      <button class='pick' style='width:200rpx' bindtap="NO">NO</button>
+    </view>
+  </view>
+</view>
+

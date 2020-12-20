@@ -22,6 +22,8 @@ Page({
     year:null,
     month:null,
     date:null,
+    isRuleTrue: false,
+    signInCode:null
   },
 
   /**
@@ -48,6 +50,7 @@ Page({
       room_detail_id:options.room_detail_id,
       stuffId:JSON.parse(options.stuffId)
     })
+    that.isSign()
     that.getSignIned()
   },
 
@@ -103,6 +106,79 @@ Page({
   imageActive:function(){//点击搜索按钮
     this.setData({
       src:'../../image/searchselected.png'
+    })
+  },
+
+  isSign:function(){
+    var that=this
+    var room_detail_id=that.data.room_detail_id
+    var signInCode
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name:'isSignIn',
+      data:{
+        room_detail_id:room_detail_id
+      }
+    })
+    .then(res=>{
+      console.log('res.result.data[0].signInCode==undefined',res.result.data[0].signInCode==undefined)
+      if(res.result.data[0].signInCode==undefined){
+        signInCode=that.randomNum(10000,99999)+''
+        wx.cloud.init()
+        wx.cloud.callFunction({
+          name:'addSignInCode',
+          data:{
+            room_detail_id:room_detail_id,
+            signInCode:signInCode
+          }
+        })
+        .then(res=>{
+          console.log('addSignInCode',res)
+        })
+        that.setData({
+          signInCode:signInCode
+        })
+      }else{
+        that.setData({
+          signInCode:res.result.data[0].signInCode
+        })
+      }
+      console.log('isSign',res)
+    })
+    .then(()=>{
+      that.QRCode()
+    })
+  },
+
+  randomNum:function(minNum,maxNum){
+    switch(arguments.length){ 
+      case 1: 
+          return parseInt(Math.random()*minNum+1,10); 
+      break; 
+      case 2: 
+          return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+      break; 
+          default: 
+              return 0; 
+          break; 
+  } 
+  },
+
+  QRCode:function(){
+    var that=this
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name:'skipTo',
+      data:{
+        room_detail_id:that.data.room_detail_id,
+        signInCode:that.data.room_detail_id
+      }
+    })
+    .then(res=>{
+      let src= "data:image/png;base64," + wx.arrayBufferToBase64(res.result.buffer)
+      that.setData({
+        imageSrc:src
+      })
     })
   },
 
@@ -241,5 +317,15 @@ Page({
     })
   },
 
+  showRule: function () {
+    this.setData({
+     isRuleTrue: true
+    })
+    },
 
+  hideRule: function () {
+    this.setData({
+      isRuleTrue: false
+    })
+    },
 })
