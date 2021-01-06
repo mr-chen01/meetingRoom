@@ -10,7 +10,8 @@
     "pages/person/person",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/personInfo/personInfo"   
+    "pages/personInfo/personInfo",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",

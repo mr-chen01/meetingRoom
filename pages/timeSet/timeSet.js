@@ -1,4 +1,5 @@
 // pages/timeSet/timeSet.js
+const dayjs=require('dayjs');
 Page({
 
   /**
@@ -143,6 +144,7 @@ Page({
    },
 
    startTime:function(){
+      var day=dayjs()
       var that=this
       var spare=this.data.spareTime
       var sh=[],eh=[]
@@ -211,6 +213,14 @@ Page({
             sRangeM.push(temp)
         }
         sRange[1]=sRangeM[0]
+              
+      for(let i=0;i<sRangeH.length;i++){
+        if(sRangeH[i]<day.hour()&&day.date()==this.data.date.date&&day.month()==this.data.date.month&&day.year()==this.data.date.year)
+          sRangeH.splice(0,1)
+          console.log('date',day.date(),this.data.date)
+      }
+      sRange[0]=sRangeH
+      
       this.setData(
         {
           sRange:sRange,

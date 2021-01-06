@@ -1,0 +1,10 @@
+<!--pages/register/register.wxml-->
+<form class='style' bindsubmit="formsubmit">
+  <input  name='name' placeholder="名字"/>
+  <picker name="groupName" mode="selector"range='{{groupList}}' value="{{index}}">
+    <text>
+      {{groupList[index]}}
+    </text>
+  </picker>
+  <button>注册</button>
+</form>

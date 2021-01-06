@@ -1,46 +1,47 @@
 <!--pages/calendar/calendar.wxml-->
-<view class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
-  <view style="font-size: 50rpx;width:750rpx">
-    {{year}}年{{month+1}}月
+  <view  class="container" bindtouchstart='touchStart'  bindtouchmove='touchMove' bindtouchend='touchEnd' >
+    <view style="font-size: 50rpx;width:750rpx">
+      {{year}}年{{month+1}}月
+    </view>
+
+      <view wx:for="{{weeks}}" wx:for-item="week" style="border-bottom-style:solid">
+        <li>{{week}}</li>
+      </view>
+      <view class="left" wx:for="{{left}}">
+        <button>
+          {{item.day}}
+        </button>
+      </view>
+      <view class='date {{item.checked?"date_checked":""}} {{item.id==-1?"past":""}} {{item.id==0&&item.checked?"today":""}}' wx:for="{{allday}}" >
+        <button bindtap='alldayTap' data-id='{{item.day}}' disabled='{{item.id==-1?"disabled":""}}' >
+          {{item.day}}
+        </button>
+      </view>
+      <view class="right" wx:for="{{right}}">
+        <button bindtap='nextmonth' data-id='{{item.day}}' data-month='item.month'>
+          {{item.day}}
+        </button>
+      </view>
+  </view>
+  <view class="bookcontainer">
+    <block wx:if="{{level==1}}">
+      <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
+      <text>{{item.name}}</text>
+      <text class="state">{{item.state==1?"有":"满"}}</text>
+      </view>
+    </block>
+    <block wx:else >
+      <view class="single" wx:for="{{memberRoom}}">
+        <view style="text-align:center">会议室{{item.rId}}</view>
+        <view class='time'>
+          <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
+          <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
+        </view>
+        <view class='body'>
+          <text>{{item.title}}</text>
+          <text>{{item.organiser}}</text>
+        </view>
+    </view>
+    </block>
   </view>
 
-    <view wx:for="{{weeks}}" wx:for-item="week" style="border-bottom-style:solid">
-      <li>{{week}}</li>
-    </view>
-    <view class="left" wx:for="{{left}}">
-      <button>
-        {{item.day}}
-      </button>
-    </view>
-    <view class='date {{item.checked?"date_checked":""}} {{item.id==-1?"past":""}} {{item.id==0&&item.checked?"today":""}}' wx:for="{{allday}}" >
-      <button bindtap='alldayTap' data-id='{{item.day}}' disabled='{{item.id==-1?"disabled":""}}' >
-        {{item.day}}
-      </button>
-    </view>
-    <view class="right" wx:for="{{right}}">
-      <button bindtap='nextmonth' data-id='{{item.day}}' data-month='item.month'>
-        {{item.day}}
-      </button>
-    </view>
-</view>
-<view class="bookcontainer">
-  <block wx:if="{{level==1}}">
-    <view wx:for="{{meetingRoom}}" class='"book" {{item.state==0?"book_filled":""}}' bindtap='{{item.state==1?"pageTo":""}}' data-data='{{item}}'>
-    <text>{{item.name}}</text>
-    <text class="state">{{item.state==1?"有":"满"}}</text>
-    </view>
-  </block>
-  <block wx:else >
-    <view class="single" wx:for="{{memberRoom}}">
-      <view style="text-align:center">会议室{{item.rId}}</view>
-      <view class='time'>
-        <text>{{item.schedule.s.h}}:{{item.schedule.s.m==0?'00':item.schedule.s.m}}</text>
-        <text>{{item.schedule.e.h}}:{{item.schedule.e.m==0?'00':item.schedule.e.m}}</text>
-      </view>
-      <view class='body'>
-        <text>{{item.title}}</text>
-        <text>{{item.organiser}}</text>
-      </view>
-  </view>
-  </block>
-</view>

@@ -35,6 +35,10 @@ Page({
     })
     this.showdate(day);
     this.openid()
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name:'getSignIn_qiandao'
+    })
   },
 
   /**
@@ -179,15 +183,22 @@ Page({
 
   openid:function(){
     var that=this
+    var isShow
     wx.cloud.init()
     wx.cloud.callFunction({
       name:'openId'
     })
     .then(res=>{
+      console.log(res)
+      if(res.result.data.length==0)
+        wx.navigateTo({
+          url: '/pages/register/register',
+        })
       that.setData({
         level:res.result.data[0].level
       })
       //  console.log(that.data.level)
+      
     })
     .then(()=>{
       that.getDetail()
