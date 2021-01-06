@@ -195,15 +195,18 @@ Page({
     for (var i = 0; i < buttonList.length;i++){
       if (buttonList[i].id == this_checked){
         buttonList[i].checked = true;
+        console.log(buttonList[i].id,'true')
       }
       else{
         buttonList[i].checked = false;
+        console.log(buttonList[i].id,'false')
       }
     }
     that.setData({
       buttonList:  buttonList,
       picked:this_checked
     })
+    console.log(buttonList)
   },
 
   getSignIned:function(){

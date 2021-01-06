@@ -8,7 +8,7 @@
     </view>
     <view class='row' style='height:30rpx'>
       <view wx:for="{{buttonList}}">
-        <button class='buttonList {{item.checked?"selected":""}}' bindtap='buttonSelceted' style='width:150rpx ;margin-right:50rpx;' data-id='{{item.id}}'>{{item.name}}</button>
+        <button class='buttonList {{item.checked==true?"selected":""}}' bindtap='buttonSelceted' style='width:150rpx ;margin-right:50rpx;' data-id='{{item.id}}'>{{item.name}}</button>
       </view>
     </view>
       <scroll-view
