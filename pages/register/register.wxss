@@ -1,0 +1,12 @@
+/* pages/register/register.wxss */
+.style{
+  height:700rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.style input{
+  border:1rpx gray solid
+}
