@@ -8,7 +8,7 @@
     </view>
     <view class='row' style='height:30rpx'>
       <view wx:for="{{buttonList}}">
-        <button class='buttonList {{item.checked?"selected":""}}' bindtap='buttonSelceted' style='width:150rpx ;margin-right:50rpx;' data-id='{{item.id}}'>{{item.name}}</button>
+        <button class='buttonList {{item.checked?"selected":""}}' bindtap='buttonSelceted' style='width:150rpx ;margin-right:50rpx; color:black;' data-id='{{item.id}}'>{{item.name}}</button>
       </view>
     </view>
       <scroll-view
@@ -37,9 +37,9 @@
 </scroll-view>
     </view>
   <view>
-    <text>签到时间:<text style="display:inline;font-weight:normal">{{year}}年{{month}}月{{date}}日{{schedule.s.h}}:{{schedule.s.m==0?'00':schedule.s.m}}~{{schedule.e.h}}:{{schedule.e.m==0?'00':schedule.e.m}}</text></text>
+    <text style="margin-left: 8px;">签到时间:<text style="display:inline;font-weight:normal">{{year}}年{{month}}月{{date}}日{{schedule.s.h}}:{{schedule.s.m==0?'00':schedule.s.m}}~{{schedule.e.h}}:{{schedule.e.m==0?'00':schedule.e.m}}</text></text>
   </view>
-  <view><text>签到人数:<text style="display:inline;font-weight:normal">{{signInedLists.length}}/{{unsignInLists.length}}</text></text></view>
+  <view><text style="margin-left: 8px;">签到人数:<text style="display:inline;font-weight:normal">{{signInedLists.length}}/{{unsignInLists.length}}</text></text></view>
   <button style='height:100rpx;margin-bottom:20rpx' bindtap='showRule'>生成签到码</button>
 </view>
 </view>

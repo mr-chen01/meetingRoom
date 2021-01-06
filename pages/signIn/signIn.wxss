@@ -32,16 +32,16 @@
   align-items: center;
 }
 input{
-  width:300rpx;
+  width:250rpx;
   height:50rpx;
   border:1rpx #C0C0C0 solid;
   border-radius:8rpx;
-  margin-top:10rpx;
+  margin-top:15rpx;
 }
 .search{
   width:50rpx;
   height:50rpx;
-  padding:10rpx
+  padding:15rpx
 }
 .container view{
   padding-bottom:50rpx;
@@ -55,20 +55,21 @@ button{
   background-color:white;
 }
 .buttonList{
-  margin-top:0rpx;
+  margin-top:5rpx;
   padding:0rpx;
 }
 .buttonList:active{
-  background-color:	#F0E68C;
+  background-color:rgba(94, 204, 235, 0.973);
 }
 .selected{
-  background-color:	#F0E68C;
+  background-color:	rgba(48, 185, 223, 0.973);
 }
 .listcontainer{
   width:inherit;
   padding:0rpx;
-  border-top:1rpx black solid;
+  border:2rpx solid black;
   margin:0rpx;
+  margin-top: 10rpx;
   columns:100rpx 3;
 }
 .item{
@@ -78,7 +79,7 @@ button{
   height: 100%;
   width: 100%;
   position: fixed;
-  background-color:rgba(0, 0, 0, .5);
+  background-color:rgba(91, 223, 64, 0.781);
   z-index: 2;
   top: 0;
   left: 0;
